@@ -1,0 +1,262 @@
+# -*- coding: utf-8 -*-
+
+### get data from open data api links -- for taipei data
+
+import pandas as pd
+import time
+import datetime
+
+import getfromurl as getting
+
+def bus(f_postfix=None):
+    out = getting.HandleGZippedJSON("http://data.taipei/bus/BUSDATA")
+    out.run()
+
+    #for key, value in out.json_data.iteritems():
+     #   print key
+    table2 = pd.DataFrame.from_dict(out.json_data['BusInfo'])
+    dt = table2.DataTime.tolist()
+    dt2 = []
+    timestamp = []
+    for dt_i in dt:
+		tt = datetime.datetime.strptime(dt_i, '%Y-%m-%d %H:%M:%S')
+		ts = int(time.mktime(tt.timetuple()))
+		dt2.append(tt)
+		timestamp.append(ts)
+    table2['datetime2'] = dt2
+    table2['utimestamp'] = timestamp
+
+    #with open('data_storage/data_bus2_'+f_postfix+'.csv', 'a') as f:
+    #    table2.to_csv(f, encoding="utf-8", header=False)
+    ## header:
+    ## ind, azimuth, busid, busstatus, carid, cartype, datatime, dutystatus, goback, latitude, longitude, providerid, routeid, speed, stationid, datetime2, utimestamp
+    return table2
+
+def busevent(f_postfix=None):
+    out = getting.HandleGZippedJSON("http://data.taipei/bus/BUSEVENT")
+    out.run()
+
+    #for key, value in out.json_data.iteritems():
+     #   print key
+    #table1 = pd.DataFrame.from_dict(out.json_data['EssentialInfo'])
+    table2 = pd.DataFrame.from_dict(out.json_data['BusInfo'])
+    dt = table2.DataTime.tolist()
+    dt2 = []
+    timestamp = []
+    for dt_i in dt:
+		tt = datetime.datetime.strptime(dt_i, '%Y-%m-%d %H:%M:%S')
+		ts = int(time.mktime(tt.timetuple()))
+		dt2.append(tt)
+		timestamp.append(ts)
+    table2['datetime2'] = dt2
+    table2['utimestamp'] = timestamp
+
+    #with open('data_storage/info_busevent2_'+f_postfix+'.csv', 'a') as f:
+    #    table1.to_csv(f, encoding="utf-8", header=False)
+    ## header:
+    ## ind, coordsys, loc, updatetime
+
+    #with open('data_storage/data_busevent2_'+f_postfix+'.csv', 'a') as f:
+    #    table2.to_csv(f, encoding="utf-8", header=False)
+    ## header:
+    ## ind, busid,busstatus,carid,caronstop,cartype, datatime,dutystatus,goback,providerid, routeid,stationid,stopid,datetime2,utimestamp
+    return table2
+
+def vehicle_detector(f_postfix=None):
+    return vd(f_postfix=f_postfix)
+
+def vd(f_postfix=None):
+    out = getting.HandleGZippedXML("http://data.taipei/tisv/VDDATA")
+    out.run()
+
+    #for key, value in out.xml_data['VDInfoSet'].iteritems():
+    #    print key
+    thetime = out.xml_data['VDInfoSet']['ExchangeTime']
+    #table1_dict = {'ExchangeTime' : [thetime]}
+    #table1=pd.DataFrame.from_dict(table1_dict)
+    #print table1
+    table2=None
+    for row in  out.xml_data['VDInfoSet']['VDInfo']:
+        data = row['VDData']['VDDevice']
+        vdid=data['DeviceID']
+        lanedata=data['LaneData']
+        timeinterval=data['TimeInterval']
+        totallane=data['TotalOfLane']
+        #lanedata['vdid']=vdid
+        temp_lanes={}
+        #print type(lanedata)
+        if type(lanedata) is list:
+            lanes={}
+            lanes['AvgOccupancy']=[]
+            lanes['AvgSpeed']=[]
+            lanes['LaneNO']=[]
+            lanes['Lvolume']=[]
+            lanes['Mvolume']=[]
+            lanes['Svolume']=[]
+            lanes['Volume']=[]
+            lanes['time']=[]
+            lanes['vdid']=[]
+            lanes['timeinterval']=[]
+
+            for lane in lanedata:
+                for key, value in lane.iteritems():
+                    lanes[key].append(value)
+                lanes['time'].append(thetime)#*len(lanes['LaneNO'])
+                lanes['vdid'].append(vdid)#*len(lanes['LaneNO'])
+                lanes['timeinterval'].append(timeinterval)#*len(lanes['LaneNO'])
+            temp_lanes=lanes
+        elif type(lanedata) is dict:
+            lanes={}
+            for key, value in lanedata.iteritems():
+                lanes[key]=[value]
+            lanes['time']=[thetime]
+            lanes['vdid']=[vdid]
+            lanes['timeinterval']=[timeinterval]
+            temp_lanes=lanes
+        else:
+            print "type error"
+        #print temp_lane
+        temp_table=pd.DataFrame.from_dict(temp_lanes)
+        if table2 is None:
+            table2=temp_table
+        else:
+            table2=table2.append(temp_table, ignore_index=True)
+    #print table2.time.head()
+    dt = table2.time.tolist()
+    dt2 = []
+    timestamp = []
+    for dt_i in dt:
+        tt = datetime.datetime.strptime(dt_i, '%Y/%m/%dT%H:%M:%S')
+        #print tt
+        ts = int(time.mktime(tt.timetuple()))
+        #print ts
+        dt2.append(tt)
+        timestamp.append(ts)
+    table2['datetime2'] = dt2
+    table2['utimestamp'] = timestamp
+    #print table1.head()
+    #print table2.head()
+
+    #with open('data_storage/info_vddata2_'+f_postfix+'.csv', 'a') as f:
+    #    table1.to_csv(f, encoding="utf-8", header=False)
+    ## header:
+    ## ind, ExchangeTime
+
+    #with open('data_storage/data_vddata2_'+f_postfix+'.csv', 'a') as f:
+    #    table2.to_csv(f, encoding="utf-8", header=False)
+    ## header:
+    ## ind,avgoccupancy,avgspeed,laneno,lvolume,mvolume,svolume volume,time,timeinterval,vdid,datetime2,utimestamp
+
+    #table1.to_sql('info_vddata2', engine, if_exists="append")
+    #table2.to_sql('data_vddata2', engine, if_exists="append")
+    return table2
+
+def bikeshare(f_postfix=None):
+    out = getting.HandleGZippedJSON("http://data.taipei/youbike")
+    out.run()
+    thetime=None
+
+    #for key, value in out.json_data.iteritems():
+    #    print key
+    table2=None
+    for key, val in out.json_data['retVal'].iteritems():
+        ubid=key
+        if thetime is None:
+            thetime= val['mday']
+        temp={}
+        for k,v in val.iteritems():
+            temp[k]=[v]
+        temp['ubid']=key
+        temp_table=pd.DataFrame.from_dict(temp)
+        if table2 is None:
+            table2=temp_table
+        else:
+            table2=table2.append(temp_table)
+    #print table2
+    #table1_dict={'time': [thetime]}
+    #table1=pd.DataFrame.from_dict(table1_dict)
+    #print table2.head()
+    dt = table2.mday.tolist()
+    dt2 = []
+    timestamp = []
+    for dt_i in dt:
+        tt = datetime.datetime.strptime(dt_i, '%Y%m%d%H%M%S')
+        #print tt
+        ts = int(time.mktime(tt.timetuple()))
+        #print ts
+        dt2.append(tt)
+        timestamp.append(ts)
+    table2['datetime2'] = dt2
+    table2['utimestamp'] = timestamp
+    #print table1.head()
+    #print table2.head()
+
+    #with open('data_storage/info_ubike2_'+f_postfix+'.csv', 'a') as f:
+    #    table1.to_csv(f, encoding="utf-8", header=False)
+    ## header:
+    ## ind, time
+
+    #with open('data_storage/data_ubike2_'+f_postfix+'.csv', 'a') as f:
+    #    table2.to_csv(f, encoding="utf-8", header=False)
+    ## header:
+    ## ind,act,ar,aren,bemp,lat,lng,mday,sarea,sareaen,sbi,sna,snaen,sno,tot,ubid,datetime2,utimestamp
+
+    #table1.to_sql('info_ubike2', engine, if_exists="append")
+    #table2.to_sql('data_ubike2', engine, if_exists="append")
+    return table2
+
+def mrt(f_postfix=None):
+    out = getting.HandleNonGZippedJSON("http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=55ec6d6e-dc5c-4268-a725-d04cc262172b")
+    out.run()
+    table2 =pd.DataFrame.from_dict(out.json_data['result']['results'])
+    dt = table2.UpdateTime.tolist()
+    dt2 = []
+    timestamp = []
+    for dt_i in dt:
+        tt = datetime.datetime.strptime(dt_i.split(".")[0], '%Y-%m-%dT%H:%M:%S')
+        ts = int(time.mktime(tt.timetuple()))
+        dt2.append(tt)
+        timestamp.append(ts)
+    table2['datetime2'] = dt2
+    table2['utimestamp'] = timestamp
+    #print table2.head()
+    #with open('data_storage/data_mrt2_'+f_postfix+'.csv', 'a') as f:
+    #    table2.to_csv(f, encoding="utf-8", header=False)
+    ## header:
+    ## ind, boundfor, station, updatetime, id, datetime2, utimestamp
+    return table2
+
+if __name__ == '__main__':
+    today = str(datetime.datetime.today().date())
+
+    try:
+        print 'trying taipei bus data '
+        busdf = busdata(f_postfix=today) # every min
+        print busdf.head(10)
+    except:
+        print( "busdata problem "+str(datetime.datetime.now()) )
+    try:
+        print 'trying taipei bus event data '
+        busevdf = busevent(f_postfix=today) # every min
+        print busevdf.head(10)
+    except:
+        print( "busevent problem "+str(datetime.datetime.now()) )
+    try:
+        print 'trying taipei vd data '
+        vddf = vddata(f_postfix=today) # every min
+        print vddf.head(10)
+    except:
+        print( "vddata problem "+str(datetime.datetime.now()) )
+    try:
+        print 'trying taipei ubike data '
+        udf = bikeshare(f_postfix=today) # every min
+        print udf.head(10)
+    except:
+        print( "ubike problem "+str(datetime.datetime.now()) )
+    try:
+        print 'trying taipei mrt data '
+        mdf = mrt(f_postfix=today) # every min
+        print mdf.head(10)
+    except:
+        print( "mrt problem "+str(datetime.datetime.now()) )
+    print( "run once! " +str(datetime.datetime.now()))
