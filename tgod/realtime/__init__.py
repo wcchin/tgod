@@ -1,4 +1,4 @@
-import getfromurl
+import get_gJX
 import taipei_transport
 import newtaipei_transport
-import kaohsiung_transport 
+import kaohsiung_transport

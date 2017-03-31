@@ -6,36 +6,30 @@ import pandas as pd
 import time
 import datetime
 
-import getfromurl as getting
+import get_gJX as getting
 
 def bus_data(f_postfix=None):
-    # probably not working at night
     # http://data.kcg.gov.tw/dataset/bus-real-time-dynamic
     url = 'http://ibus.tbkc.gov.tw/xmlbus/GetBusData.xml'
     out = getting.HandleNonGZippedXML(url)
     out.run()
-    print out.xml_data
-    infos = out.xml_data['XML_Head']['Infos']['Info']
-    """
-    #print len(infos)
-    data_dic = {}
-    for i in range(len(infos)):
-        data_dic[i] = infos[i]
-    df = pd.DataFrame.from_dict(data_dic, orient='index')
+    infos = out.xml_data['BusDynInfo']['EssentialInfo']
+    busdata = out.xml_data['BusDynInfo']['BusInfo']['BusData']
+    bus_dict = {}
+    i = 0
+    for bus in busdata:
+        bus_dict[i] = bus
+        i+=1
+    df = pd.DataFrame.from_dict(bus_dict, orient='index')
     col = df.columns.tolist()
     col2 = { c:c.replace('@','') for c in col }
     df = df.rename(columns=col2)
-
-    df['datacollecttime'] = pd.to_datetime(df['datacollecttime'], format='%Y/%m/%d %H:%M:%S')
-    timestamp = [ int(time.mktime(tt.timetuple())) for tt in df['datacollecttime'].tolist() ]
-    df = df.rename(columns={'datacollecttime':'datetime2'})
+    df['DataTime'] = pd.to_datetime(df['DataTime'], format='%Y-%m-%d %H:%M:%S')
+    timestamp = [ int(time.mktime(tt.timetuple())) for tt in df['DataTime'].tolist() ]
+    df = df.rename(columns={'DataTime':'datetime2'})
     df['utimestamp'] = timestamp
-
-    #print df.head()
-    #for key, value in out.xml_data['VDInfoSet'].iteritems():
-    #    print key
     return df
-    """
+
 
 def road_level(f_postfix=None):
     # http://data.kcg.gov.tw/dataset/department-of-transportation9
@@ -43,8 +37,6 @@ def road_level(f_postfix=None):
     out = getting.HandleNonGZippedXML(url)
     out.run()
     infos = out.xml_data['XML_Head']['Infos']['Info']
-    #print infos
-    #print len(infos)
     data_dic = {}
     for i in range(len(infos)):
         data_dic[i] = infos[i]
@@ -57,10 +49,6 @@ def road_level(f_postfix=None):
     timestamp = [ int(time.mktime(tt.timetuple())) for tt in df['datacollecttime'].tolist() ]
     df = df.rename(columns={'datacollecttime':'datetime2'})
     df['utimestamp'] = timestamp
-
-    #print df.head()
-    #for key, value in out.xml_data['VDInfoSet'].iteritems():
-    #    print key
     return df
 
 def vd(f_postfix=None):
@@ -69,22 +57,17 @@ def vd(f_postfix=None):
     out = getting.HandleNonGZippedXML(url)
     out.run()
     infos = out.xml_data['XML_Head']['Infos']['Info']
-    #print infos
-    #print len(infos)
     data_dic = {}
     j = 0
     for i in infos:
         d = {k: i[k] for k in ('@vdid', '@status', '@datacollecttime')}
-        #print d
         for l in i['lane']:
             li = { k:l[k] for k in ('@laneoccupy','@speed','@vsrid','@vsrdir') }
             li.update(d)
-            #print l.keys()
             for c in l['cars']:
                 k = '@'+c['@carid']+'_vol'
                 v = c['@volume']
                 li[k] = v
-            #print li
             data_dic[j] = li
             j+=1
 
@@ -105,8 +88,6 @@ def vd5min(f_postfix=None):
     out = getting.HandleNonGZippedXML(url)
     out.run()
     infos = out.xml_data['XML_Head']['Infos']['Info']
-    #print infos
-    #print len(infos)
     data_dic = {}
     j = 0
     for i in infos:
@@ -115,12 +96,10 @@ def vd5min(f_postfix=None):
         for l in i['lane']:
             li = { k:l[k] for k in ('@laneoccupy','@speed','@vsrid','@vsrdir') }
             li.update(d)
-            #print l.keys()
             for c in l['cars']:
                 k = '@'+c['@carid']+'_vol'
                 v = c['@volume']
                 li[k] = v
-            #print li
             data_dic[j] = li
             j+=1
 
@@ -136,7 +115,7 @@ def vd5min(f_postfix=None):
     return df
 
 if __name__ == '__main__':
-    
+
     rdf = road_level()
     print rdf.head(10)
 
@@ -146,5 +125,5 @@ if __name__ == '__main__':
     vdf5 = vd5min()
     print vdf5.head(10)
 
-
-    #bus_data()
+    busdf = bus_data()
+    print busdf.head(10)
