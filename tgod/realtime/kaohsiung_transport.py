@@ -6,7 +6,7 @@ import pandas as pd
 import time
 import datetime
 
-import get_gJX as getting
+from utils import get_gJX as getting
 
 def bus_data(f_postfix=None):
     # http://data.kcg.gov.tw/dataset/bus-real-time-dynamic

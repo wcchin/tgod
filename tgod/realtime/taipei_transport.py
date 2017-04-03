@@ -6,7 +6,7 @@ import pandas as pd
 import time
 import datetime
 
-import get_gJX as getting
+from utils import get_gJX as getting
 
 def bus(f_postfix=None):
     out = getting.HandleGZippedJSON("http://data.taipei/bus/BUSDATA")
@@ -28,7 +28,8 @@ def busevent(f_postfix=None):
     out = getting.HandleGZippedJSON("http://data.taipei/bus/BUSEVENT")
     out.run()
     table2 = pd.DataFrame.from_dict(out.json_data['BusInfo'])
-    dt = table2.DataTime.tolist()
+    print 'hey',table2.columns
+    dt = table2['DataTime'].tolist()
     dt2 = []
     timestamp = []
     for dt_i in dt:

@@ -1,0 +1,11 @@
+ind,key,path
+0,airport,"pbfs/transportation/airports.pbf.gz"
+1,dock,"pbfs/transportation/dock.pbf.gz"
+2,highspeedrail_station,"pbfs/transportation/highspeedrail_station.pbf.gz"
+3,highspeedrail_way,"pbfs/transportation/highspeedrail_way.pbf.gz"
+4,highway_1,"pbfs/transportation/highway_1.pbf.gz"
+5,highway_2,"pbfs/transportation/highway_2.pbf.gz"
+6,mrt_station,"pbfs/transportation/mrt_station.pbf.gz"
+7,mrt_way,"pbfs/transportation/mrt_way.pbf.gz"
+8,rail_station,"pbfs/transportation/rail_station.pbf.gz"
+9,rail_way,"pbfs/transportation/rail_way.pbf.gz"

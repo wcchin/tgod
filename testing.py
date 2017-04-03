@@ -8,8 +8,8 @@ def testing_taipei_transport_data():
     busdf = tt.bus()
     print busdf.head(10)
 
-    busevdf = tt.busevent()
-    print busevdf.head(10)
+    #busevdf = tt.busevent()
+    #print busevdf.head(10)
 
     vddf = tt.vd()
     print vddf.head(10)

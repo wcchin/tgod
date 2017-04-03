@@ -6,7 +6,7 @@ import pandas as pd
 import time
 import datetime
 
-import get_gJX as getting
+from utils import get_gJX as getting
 
 def vehicle_detector(f_postfix=None):
     return vd(f_postfix=f_postfix)
