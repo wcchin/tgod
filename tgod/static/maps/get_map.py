@@ -29,12 +29,12 @@ def _get_geodf(obj, akey):
     fdir = os.path.dirname(__file__)
     paths_config = fdir+'/'+'file_loc_'+obj+'.csv'
     #print paths_config
-    df_path = pd.read_csv(paths_config)
-    df_path.set_index('key', inplace=True)
+    df_path = pd.read_csv(paths_config, index_col=1)
+    #df_path.set_index('key', inplace=True)
     dic_path = df_path.to_dict(orient='index')
     if akey in dic_path:
         fp = fdir+'/'+dic_path[akey]['path']
-        print fp
+        #print fp
         gdf = read_from_path.reading(fp)
         return gdf.head()
     else:
@@ -54,8 +54,8 @@ def main_test():
     #get_boundary_key()
     #get_transportation_key()
 
-    #gdf = get_boundary('bsu0_pingtung')
-    #print gdf.head()
+    gdf = get_boundary('bsu0_pingtung')
+    print gdf.head()
 
     #gdf = get_transportation('highway_2')
     #print gdf.head()
