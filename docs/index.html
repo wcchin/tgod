@@ -1,0 +1,279 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <title>首頁 &mdash; 臺灣地理開放資料介接工具</title>
+
+    <link rel="shortcut icon" href="./img/favicon.ico">
+    <link rel="stylesheet" href="./css/alabaster.css" type="text/css">
+    <link rel="stylesheet" href="./css/alabaster-overrides.css" type="text/css">
+
+    
+
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+    
+  
+</head>
+<body>
+
+  <div class="document">
+    <div class="documentwrapper">
+      <div class="bodywrapper">
+        <div class="body" role="main">
+          
+            <h1 id="taiwan-geographic-open-data-tgod">Taiwan Geographic Open Data (tgod)<a class="headerlink" href="#taiwan-geographic-open-data-tgod" title="Permanent link">¶</a></h1>
+<h2 id="for-python">臺灣地理開放資料介接工具 (for python)<a class="headerlink" href="#for-python" title="Permanent link">¶</a></h2>
+<h2 id="_1">背景<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
+<p>這專案的目的在於提供將臺灣地理相關的開放資料抓下來，並轉成 pandas.dataframe 的一個小工具。
+主要是因爲各公家單位準備的開放資料的格式都不太一樣，即使是同一個單位，不同的資料也會有不同的格式設定，包括有些會壓縮... 之類。
+所以我想說將資料直接整理成表單的 dataframe 格式，對於後續分析、應用、甚至再轉成特定格式(JSON/XML)，應該都會相對直觀與容易。</p>
+<p>目前我已整理的資料表主要有臺北市、新北市、高雄市的一些交通相關資料表。項目及資料來源記錄在 data_info.ods 中。
+未來有時間的時候會試着將其他資料的介接也整理起來。</p>
+<h2 id="_2">簡單說明<a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
+<p>這專案分成兩大部分 (預計):</p>
+<ul>
+<li>
+<p>第一部分，主要是 (近)即時更新的資料，包括公車、Youbike 等資訊，這部分仰賴開放資料的 API (JSON, XML)，透過人工的針對資料欄位作處理之後生成 dataframe 格式；同時也自動增加 unix timestamp 欄位作爲後續應用。<br />
+    這部分目前整理了臺北市、新北市、高雄市部分的交通開放資料。</p>
+</li>
+<li>
+<p>第二部分，主要是將一些常用的空間資料，包括行政區 (從縣市到最小統計區)、國道省道、鐵路路線、火車站、捷運站等，可以獲取的官方開放的空間資料，整理成壓縮的pbf 格式 放到專案中，以供後續只要透過一些function 及 key 就可以直接叫出這些資料(GeoDataFrame 格式)。</p>
+</li>
+</ul>
+<h2 id="getting-started">獲取 (getting started)<a class="headerlink" href="#getting-started" title="Permanent link">¶</a></h2>
+<p>在成功安裝好 geopandas, geobuf 之後：</p>
+<pre><code class="sh">$ git clone https://github.com/wcchin/tgod
+$ cd tgod
+$ pip install -e .
+
+</code></pre>
+
+<p>請注意， -e 後面還有一個 . 。
+這裏會建議用 -e 的安裝方式，是因爲這工具還在很初步的建立階段。</p>
+<blockquote>
+<p>We can also install the package with a symlink, 
+so that changes to the source files will be immediately available to other users of the package on our system:<br />
+$ pip install -e .</p>
+</blockquote>
+<p>from page(https://python-packaging.readthedocs.io/en/latest/minimal.html)</p>
+<h2 id="usage">使用 (Usage)<a class="headerlink" href="#usage" title="Permanent link">¶</a></h2>
+<p>使用方法可參考 testing.py、 testing_static.py 
+或者簡單來說：</p>
+<ul>
+<li>即時資料的臺北市公車位置資料:</li>
+</ul>
+<pre><code class="python">from tgod import taipei_transport as tt  
+busdf = tt.bus()  
+print busdf.head(10)
+</code></pre>
+
+<ul>
+<li>靜態的空間資料 (取屏東最小統計區資料):</li>
+</ul>
+<pre><code class="python">from tgod import get_map  
+gdf = get_map.get_boundary('bsu0_pingtung')  
+print gdf.head()
+</code></pre>
+
+<h2 id="dependencies">依賴工具 (dependencies)<a class="headerlink" href="#dependencies" title="Permanent link">¶</a></h2>
+<ul>
+<li>pandas (目標格式是 pandas DataFrame)</li>
+<li>geopandas (所以包括其依賴的 fiona、shapely、 pyproj ... windows 使用者請自行安裝好~~)</li>
+<li>geobuf (爲了這專案才發現的一個新玩意，換句話說我也不熟...)</li>
+</ul>
+            
+              <h2>Navigation</h2>
+
+
+<ul>
+  
+      
+        <li>
+          <a href=".">首頁</a>
+        </li>
+      
+    
+      
+        <li>
+          <a href="usage_realtime_taipei/">動態資料-臺北市</a>
+        </li>
+      
+    
+      
+        <li>
+          <a href="usage_realtime_newtaipei/">動態資料-新北市</a>
+        </li>
+      
+    
+      
+        <li>
+          <a href="usage_realtime_kaohsiung/">動態資料-高雄市</a>
+        </li>
+      
+    
+      
+        <li>
+          <a href="usage_static/">靜態資料</a>
+        </li>
+      
+    
+      
+        <li>
+          <a href="about/">關於</a>
+        </li>
+      
+    
+  </ul>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebarwrapper">
+        
+  <h1 class="logo"><a href=".">臺灣地理開放資料介接工具</a></h1>
+
+
+
+        <div id="searchbox" style="display: none;" role="search">
+  <h3>Quick search</h3>
+  <form class="search" action="./search.html" method="get">
+    <input name="q" type="text">
+    <input value="Go" type="submit">
+  </form>
+  <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+  </p>
+</div>
+<script type="text/javascript">
+  document.getElementById("searchbox").style.display = "block";
+</script>
+        <h2>Navigation</h2>
+
+
+<ul>
+  
+      
+        <li>
+          <a href=".">首頁</a>
+        </li>
+      
+    
+      
+        <li>
+          <a href="usage_realtime_taipei/">動態資料-臺北市</a>
+        </li>
+      
+    
+      
+        <li>
+          <a href="usage_realtime_newtaipei/">動態資料-新北市</a>
+        </li>
+      
+    
+      
+        <li>
+          <a href="usage_realtime_kaohsiung/">動態資料-高雄市</a>
+        </li>
+      
+    
+      
+        <li>
+          <a href="usage_static/">靜態資料</a>
+        </li>
+      
+    
+      
+        <li>
+          <a href="about/">關於</a>
+        </li>
+      
+    
+  </ul>
+        
+
+
+
+<h3>Table Of Contents</h3>
+
+<nav>
+  
+  
+    <ul>
+    
+      <li><a href="#for-python">臺灣地理開放資料介接工具 (for python)</a></li>
+      <ul>
+    
+  </ul>
+    
+      <li><a href="#_1">背景</a></li>
+      <ul>
+    
+  </ul>
+    
+      <li><a href="#_2">簡單說明</a></li>
+      <ul>
+    
+  </ul>
+    
+      <li><a href="#getting-started">獲取 (getting started)</a></li>
+      <ul>
+    
+  </ul>
+    
+      <li><a href="#usage">使用 (Usage)</a></li>
+      <ul>
+    
+  </ul>
+    
+      <li><a href="#dependencies">依賴工具 (dependencies)</a></li>
+      <ul>
+    
+  </ul>
+    
+  </ul>
+  
+
+  
+    <hr>
+    <ul>
+      
+        <li class="toctree-l1"><a href="https://github.com/wcchin/tgod">Visit project on GitHub</a></li>
+      
+    </ul>
+  
+</nav>
+         <!---->
+      </div>
+    </div>
+    <div class="clearer"></div>
+  </div>
+
+  
+    <div class="footer">
+      
+        &copy; 2017 Benny Chin (wcchin)
+      
+      
+        |
+        Powered by <a href="http://www.mkdocs.org">MkDocs 0.16.2</a>
+        &amp; <a href="https://github.com/iamale/mkdocs-alabaster">Alabaster</a>
+      
+    </div>
+  
+
+  <!--
+  MkDocs version      : 0.16.2
+  Docs Build Date UTC : 2017-04-05 10:50:55
+  -->
+</body>
+</html>

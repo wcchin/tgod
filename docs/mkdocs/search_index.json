@@ -1,0 +1,144 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "Taiwan Geographic Open Data (tgod)\n\u00b6\n\n\n\u81fa\u7063\u5730\u7406\u958b\u653e\u8cc7\u6599\u4ecb\u63a5\u5de5\u5177 (for python)\n\u00b6\n\n\n\u80cc\u666f\n\u00b6\n\n\n\u9019\u5c08\u6848\u7684\u76ee\u7684\u5728\u65bc\u63d0\u4f9b\u5c07\u81fa\u7063\u5730\u7406\u76f8\u95dc\u7684\u958b\u653e\u8cc7\u6599\u6293\u4e0b\u4f86\uff0c\u4e26\u8f49\u6210 pandas.dataframe \u7684\u4e00\u500b\u5c0f\u5de5\u5177\u3002\n\u4e3b\u8981\u662f\u56e0\u7232\u5404\u516c\u5bb6\u55ae\u4f4d\u6e96\u5099\u7684\u958b\u653e\u8cc7\u6599\u7684\u683c\u5f0f\u90fd\u4e0d\u592a\u4e00\u6a23\uff0c\u5373\u4f7f\u662f\u540c\u4e00\u500b\u55ae\u4f4d\uff0c\u4e0d\u540c\u7684\u8cc7\u6599\u4e5f\u6703\u6709\u4e0d\u540c\u7684\u683c\u5f0f\u8a2d\u5b9a\uff0c\u5305\u62ec\u6709\u4e9b\u6703\u58d3\u7e2e... \u4e4b\u985e\u3002\n\u6240\u4ee5\u6211\u60f3\u8aaa\u5c07\u8cc7\u6599\u76f4\u63a5\u6574\u7406\u6210\u8868\u55ae\u7684 dataframe \u683c\u5f0f\uff0c\u5c0d\u65bc\u5f8c\u7e8c\u5206\u6790\u3001\u61c9\u7528\u3001\u751a\u81f3\u518d\u8f49\u6210\u7279\u5b9a\u683c\u5f0f(JSON/XML)\uff0c\u61c9\u8a72\u90fd\u6703\u76f8\u5c0d\u76f4\u89c0\u8207\u5bb9\u6613\u3002\n\n\n\u76ee\u524d\u6211\u5df2\u6574\u7406\u7684\u8cc7\u6599\u8868\u4e3b\u8981\u6709\u81fa\u5317\u5e02\u3001\u65b0\u5317\u5e02\u3001\u9ad8\u96c4\u5e02\u7684\u4e00\u4e9b\u4ea4\u901a\u76f8\u95dc\u8cc7\u6599\u8868\u3002\u9805\u76ee\u53ca\u8cc7\u6599\u4f86\u6e90\u8a18\u9304\u5728 data_info.ods \u4e2d\u3002\n\u672a\u4f86\u6709\u6642\u9593\u7684\u6642\u5019\u6703\u8a66\u7740\u5c07\u5176\u4ed6\u8cc7\u6599\u7684\u4ecb\u63a5\u4e5f\u6574\u7406\u8d77\u4f86\u3002\n\n\n\u7c21\u55ae\u8aaa\u660e\n\u00b6\n\n\n\u9019\u5c08\u6848\u5206\u6210\u5169\u5927\u90e8\u5206 (\u9810\u8a08):\n\n\n\n\n\n\n\u7b2c\u4e00\u90e8\u5206\uff0c\u4e3b\u8981\u662f (\u8fd1)\u5373\u6642\u66f4\u65b0\u7684\u8cc7\u6599\uff0c\u5305\u62ec\u516c\u8eca\u3001Youbike \u7b49\u8cc7\u8a0a\uff0c\u9019\u90e8\u5206\u4ef0\u8cf4\u958b\u653e\u8cc7\u6599\u7684 API (JSON, XML)\uff0c\u900f\u904e\u4eba\u5de5\u7684\u91dd\u5c0d\u8cc7\u6599\u6b04\u4f4d\u4f5c\u8655\u7406\u4e4b\u5f8c\u751f\u6210 dataframe \u683c\u5f0f\uff1b\u540c\u6642\u4e5f\u81ea\u52d5\u589e\u52a0 unix timestamp \u6b04\u4f4d\u4f5c\u7232\u5f8c\u7e8c\u61c9\u7528\u3002\n\n    \u9019\u90e8\u5206\u76ee\u524d\u6574\u7406\u4e86\u81fa\u5317\u5e02\u3001\u65b0\u5317\u5e02\u3001\u9ad8\u96c4\u5e02\u90e8\u5206\u7684\u4ea4\u901a\u958b\u653e\u8cc7\u6599\u3002\n\n\n\n\n\n\n\u7b2c\u4e8c\u90e8\u5206\uff0c\u4e3b\u8981\u662f\u5c07\u4e00\u4e9b\u5e38\u7528\u7684\u7a7a\u9593\u8cc7\u6599\uff0c\u5305\u62ec\u884c\u653f\u5340 (\u5f9e\u7e23\u5e02\u5230\u6700\u5c0f\u7d71\u8a08\u5340)\u3001\u570b\u9053\u7701\u9053\u3001\u9435\u8def\u8def\u7dda\u3001\u706b\u8eca\u7ad9\u3001\u6377\u904b\u7ad9\u7b49\uff0c\u53ef\u4ee5\u7372\u53d6\u7684\u5b98\u65b9\u958b\u653e\u7684\u7a7a\u9593\u8cc7\u6599\uff0c\u6574\u7406\u6210\u58d3\u7e2e\u7684pbf \u683c\u5f0f \u653e\u5230\u5c08\u6848\u4e2d\uff0c\u4ee5\u4f9b\u5f8c\u7e8c\u53ea\u8981\u900f\u904e\u4e00\u4e9bfunction \u53ca key \u5c31\u53ef\u4ee5\u76f4\u63a5\u53eb\u51fa\u9019\u4e9b\u8cc7\u6599(GeoDataFrame \u683c\u5f0f)\u3002\n\n\n\n\n\n\n\u7372\u53d6 (getting started)\n\u00b6\n\n\n\u5728\u6210\u529f\u5b89\u88dd\u597d geopandas, geobuf \u4e4b\u5f8c\uff1a\n\n\n$ git clone https://github.com/wcchin/tgod\n$ cd tgod\n$ pip install -e .\n\n\n\n\n\n\u8acb\u6ce8\u610f\uff0c -e \u5f8c\u9762\u9084\u6709\u4e00\u500b . \u3002\n\u9019\u88cf\u6703\u5efa\u8b70\u7528 -e \u7684\u5b89\u88dd\u65b9\u5f0f\uff0c\u662f\u56e0\u7232\u9019\u5de5\u5177\u9084\u5728\u5f88\u521d\u6b65\u7684\u5efa\u7acb\u968e\u6bb5\u3002\n\n\n\n\nWe can also install the package with a symlink, \nso that changes to the source files will be immediately available to other users of the package on our system:\n\n$ pip install -e .\n\n\n\n\nfrom page(https://python-packaging.readthedocs.io/en/latest/minimal.html)\n\n\n\u4f7f\u7528 (Usage)\n\u00b6\n\n\n\u4f7f\u7528\u65b9\u6cd5\u53ef\u53c3\u8003 testing.py\u3001 testing_static.py \n\u6216\u8005\u7c21\u55ae\u4f86\u8aaa\uff1a\n\n\n\n\n\u5373\u6642\u8cc7\u6599\u7684\u81fa\u5317\u5e02\u516c\u8eca\u4f4d\u7f6e\u8cc7\u6599:\n\n\n\n\nfrom tgod import taipei_transport as tt  \nbusdf = tt.bus()  \nprint busdf.head(10)\n\n\n\n\n\n\n\u975c\u614b\u7684\u7a7a\u9593\u8cc7\u6599 (\u53d6\u5c4f\u6771\u6700\u5c0f\u7d71\u8a08\u5340\u8cc7\u6599):\n\n\n\n\nfrom tgod import get_map  \ngdf = get_map.get_boundary('bsu0_pingtung')  \nprint gdf.head()\n\n\n\n\n\u4f9d\u8cf4\u5de5\u5177 (dependencies)\n\u00b6\n\n\n\n\npandas (\u76ee\u6a19\u683c\u5f0f\u662f pandas DataFrame)\n\n\ngeopandas (\u6240\u4ee5\u5305\u62ec\u5176\u4f9d\u8cf4\u7684 fiona\u3001shapely\u3001 pyproj ... windows \u4f7f\u7528\u8005\u8acb\u81ea\u884c\u5b89\u88dd\u597d~~)\n\n\ngeobuf (\u7232\u4e86\u9019\u5c08\u6848\u624d\u767c\u73fe\u7684\u4e00\u500b\u65b0\u73a9\u610f\uff0c\u63db\u53e5\u8a71\u8aaa\u6211\u4e5f\u4e0d\u719f...)", 
+            "title": "\u9996\u9801"
+        }, 
+        {
+            "location": "/#taiwan-geographic-open-data-tgod", 
+            "text": "", 
+            "title": "Taiwan Geographic Open Data (tgod)"
+        }, 
+        {
+            "location": "/#for-python", 
+            "text": "", 
+            "title": "\u81fa\u7063\u5730\u7406\u958b\u653e\u8cc7\u6599\u4ecb\u63a5\u5de5\u5177 (for python)"
+        }, 
+        {
+            "location": "/#_1", 
+            "text": "\u9019\u5c08\u6848\u7684\u76ee\u7684\u5728\u65bc\u63d0\u4f9b\u5c07\u81fa\u7063\u5730\u7406\u76f8\u95dc\u7684\u958b\u653e\u8cc7\u6599\u6293\u4e0b\u4f86\uff0c\u4e26\u8f49\u6210 pandas.dataframe \u7684\u4e00\u500b\u5c0f\u5de5\u5177\u3002\n\u4e3b\u8981\u662f\u56e0\u7232\u5404\u516c\u5bb6\u55ae\u4f4d\u6e96\u5099\u7684\u958b\u653e\u8cc7\u6599\u7684\u683c\u5f0f\u90fd\u4e0d\u592a\u4e00\u6a23\uff0c\u5373\u4f7f\u662f\u540c\u4e00\u500b\u55ae\u4f4d\uff0c\u4e0d\u540c\u7684\u8cc7\u6599\u4e5f\u6703\u6709\u4e0d\u540c\u7684\u683c\u5f0f\u8a2d\u5b9a\uff0c\u5305\u62ec\u6709\u4e9b\u6703\u58d3\u7e2e... \u4e4b\u985e\u3002\n\u6240\u4ee5\u6211\u60f3\u8aaa\u5c07\u8cc7\u6599\u76f4\u63a5\u6574\u7406\u6210\u8868\u55ae\u7684 dataframe \u683c\u5f0f\uff0c\u5c0d\u65bc\u5f8c\u7e8c\u5206\u6790\u3001\u61c9\u7528\u3001\u751a\u81f3\u518d\u8f49\u6210\u7279\u5b9a\u683c\u5f0f(JSON/XML)\uff0c\u61c9\u8a72\u90fd\u6703\u76f8\u5c0d\u76f4\u89c0\u8207\u5bb9\u6613\u3002  \u76ee\u524d\u6211\u5df2\u6574\u7406\u7684\u8cc7\u6599\u8868\u4e3b\u8981\u6709\u81fa\u5317\u5e02\u3001\u65b0\u5317\u5e02\u3001\u9ad8\u96c4\u5e02\u7684\u4e00\u4e9b\u4ea4\u901a\u76f8\u95dc\u8cc7\u6599\u8868\u3002\u9805\u76ee\u53ca\u8cc7\u6599\u4f86\u6e90\u8a18\u9304\u5728 data_info.ods \u4e2d\u3002\n\u672a\u4f86\u6709\u6642\u9593\u7684\u6642\u5019\u6703\u8a66\u7740\u5c07\u5176\u4ed6\u8cc7\u6599\u7684\u4ecb\u63a5\u4e5f\u6574\u7406\u8d77\u4f86\u3002", 
+            "title": "\u80cc\u666f"
+        }, 
+        {
+            "location": "/#_2", 
+            "text": "\u9019\u5c08\u6848\u5206\u6210\u5169\u5927\u90e8\u5206 (\u9810\u8a08):    \u7b2c\u4e00\u90e8\u5206\uff0c\u4e3b\u8981\u662f (\u8fd1)\u5373\u6642\u66f4\u65b0\u7684\u8cc7\u6599\uff0c\u5305\u62ec\u516c\u8eca\u3001Youbike \u7b49\u8cc7\u8a0a\uff0c\u9019\u90e8\u5206\u4ef0\u8cf4\u958b\u653e\u8cc7\u6599\u7684 API (JSON, XML)\uff0c\u900f\u904e\u4eba\u5de5\u7684\u91dd\u5c0d\u8cc7\u6599\u6b04\u4f4d\u4f5c\u8655\u7406\u4e4b\u5f8c\u751f\u6210 dataframe \u683c\u5f0f\uff1b\u540c\u6642\u4e5f\u81ea\u52d5\u589e\u52a0 unix timestamp \u6b04\u4f4d\u4f5c\u7232\u5f8c\u7e8c\u61c9\u7528\u3002 \n    \u9019\u90e8\u5206\u76ee\u524d\u6574\u7406\u4e86\u81fa\u5317\u5e02\u3001\u65b0\u5317\u5e02\u3001\u9ad8\u96c4\u5e02\u90e8\u5206\u7684\u4ea4\u901a\u958b\u653e\u8cc7\u6599\u3002    \u7b2c\u4e8c\u90e8\u5206\uff0c\u4e3b\u8981\u662f\u5c07\u4e00\u4e9b\u5e38\u7528\u7684\u7a7a\u9593\u8cc7\u6599\uff0c\u5305\u62ec\u884c\u653f\u5340 (\u5f9e\u7e23\u5e02\u5230\u6700\u5c0f\u7d71\u8a08\u5340)\u3001\u570b\u9053\u7701\u9053\u3001\u9435\u8def\u8def\u7dda\u3001\u706b\u8eca\u7ad9\u3001\u6377\u904b\u7ad9\u7b49\uff0c\u53ef\u4ee5\u7372\u53d6\u7684\u5b98\u65b9\u958b\u653e\u7684\u7a7a\u9593\u8cc7\u6599\uff0c\u6574\u7406\u6210\u58d3\u7e2e\u7684pbf \u683c\u5f0f \u653e\u5230\u5c08\u6848\u4e2d\uff0c\u4ee5\u4f9b\u5f8c\u7e8c\u53ea\u8981\u900f\u904e\u4e00\u4e9bfunction \u53ca key \u5c31\u53ef\u4ee5\u76f4\u63a5\u53eb\u51fa\u9019\u4e9b\u8cc7\u6599(GeoDataFrame \u683c\u5f0f)\u3002", 
+            "title": "\u7c21\u55ae\u8aaa\u660e"
+        }, 
+        {
+            "location": "/#getting-started", 
+            "text": "\u5728\u6210\u529f\u5b89\u88dd\u597d geopandas, geobuf \u4e4b\u5f8c\uff1a  $ git clone https://github.com/wcchin/tgod\n$ cd tgod\n$ pip install -e .  \u8acb\u6ce8\u610f\uff0c -e \u5f8c\u9762\u9084\u6709\u4e00\u500b . \u3002\n\u9019\u88cf\u6703\u5efa\u8b70\u7528 -e \u7684\u5b89\u88dd\u65b9\u5f0f\uff0c\u662f\u56e0\u7232\u9019\u5de5\u5177\u9084\u5728\u5f88\u521d\u6b65\u7684\u5efa\u7acb\u968e\u6bb5\u3002   We can also install the package with a symlink, \nso that changes to the source files will be immediately available to other users of the package on our system: \n$ pip install -e .   from page(https://python-packaging.readthedocs.io/en/latest/minimal.html)", 
+            "title": "\u7372\u53d6 (getting started)"
+        }, 
+        {
+            "location": "/#usage", 
+            "text": "\u4f7f\u7528\u65b9\u6cd5\u53ef\u53c3\u8003 testing.py\u3001 testing_static.py \n\u6216\u8005\u7c21\u55ae\u4f86\u8aaa\uff1a   \u5373\u6642\u8cc7\u6599\u7684\u81fa\u5317\u5e02\u516c\u8eca\u4f4d\u7f6e\u8cc7\u6599:   from tgod import taipei_transport as tt  \nbusdf = tt.bus()  \nprint busdf.head(10)   \u975c\u614b\u7684\u7a7a\u9593\u8cc7\u6599 (\u53d6\u5c4f\u6771\u6700\u5c0f\u7d71\u8a08\u5340\u8cc7\u6599):   from tgod import get_map  \ngdf = get_map.get_boundary('bsu0_pingtung')  \nprint gdf.head()", 
+            "title": "\u4f7f\u7528 (Usage)"
+        }, 
+        {
+            "location": "/#dependencies", 
+            "text": "pandas (\u76ee\u6a19\u683c\u5f0f\u662f pandas DataFrame)  geopandas (\u6240\u4ee5\u5305\u62ec\u5176\u4f9d\u8cf4\u7684 fiona\u3001shapely\u3001 pyproj ... windows \u4f7f\u7528\u8005\u8acb\u81ea\u884c\u5b89\u88dd\u597d~~)  geobuf (\u7232\u4e86\u9019\u5c08\u6848\u624d\u767c\u73fe\u7684\u4e00\u500b\u65b0\u73a9\u610f\uff0c\u63db\u53e5\u8a71\u8aaa\u6211\u4e5f\u4e0d\u719f...)", 
+            "title": "\u4f9d\u8cf4\u5de5\u5177 (dependencies)"
+        }, 
+        {
+            "location": "/usage_realtime_taipei/", 
+            "text": "\u958b\u653e\u8cc7\u6599\u52d5\u614b API \u7684\u4ecb\u63a5\u5de5\u5177 - \u81fa\u5317\u4ea4\u901a\u8cc7\u6599\n\u00b6\n\n\n\u8cc7\u6599\u4f86\u6e90: http://data.taipei\n\n\n\u6a21\u7d44\n\u00b6\n\n\ntgod.taipei_transport\n\n\n\n\n\u529f\u80fd\n\u00b6", 
+            "title": "\u52d5\u614b\u8cc7\u6599-\u81fa\u5317\u5e02"
+        }, 
+        {
+            "location": "/usage_realtime_taipei/#api-", 
+            "text": "\u8cc7\u6599\u4f86\u6e90: http://data.taipei", 
+            "title": "\u958b\u653e\u8cc7\u6599\u52d5\u614b API \u7684\u4ecb\u63a5\u5de5\u5177 - \u81fa\u5317\u4ea4\u901a\u8cc7\u6599"
+        }, 
+        {
+            "location": "/usage_realtime_taipei/#_1", 
+            "text": "tgod.taipei_transport", 
+            "title": "\u6a21\u7d44"
+        }, 
+        {
+            "location": "/usage_realtime_taipei/#_2", 
+            "text": "", 
+            "title": "\u529f\u80fd"
+        }, 
+        {
+            "location": "/usage_realtime_newtaipei/", 
+            "text": "\u958b\u653e\u8cc7\u6599\u52d5\u614b API \u7684\u4ecb\u63a5\u5de5\u5177 - \u65b0\u5317\u4ea4\u901a\u8cc7\u6599\n\u00b6\n\n\n\u8cc7\u6599\u4f86\u6e90: http://data.gov.tw\n\n\n\u6a21\u7d44\n\u00b6\n\n\ntgod.newtaipei_transport\n\n\n\n\n\u529f\u80fd\n\u00b6", 
+            "title": "\u52d5\u614b\u8cc7\u6599-\u65b0\u5317\u5e02"
+        }, 
+        {
+            "location": "/usage_realtime_newtaipei/#api-", 
+            "text": "\u8cc7\u6599\u4f86\u6e90: http://data.gov.tw", 
+            "title": "\u958b\u653e\u8cc7\u6599\u52d5\u614b API \u7684\u4ecb\u63a5\u5de5\u5177 - \u65b0\u5317\u4ea4\u901a\u8cc7\u6599"
+        }, 
+        {
+            "location": "/usage_realtime_newtaipei/#_1", 
+            "text": "tgod.newtaipei_transport", 
+            "title": "\u6a21\u7d44"
+        }, 
+        {
+            "location": "/usage_realtime_newtaipei/#_2", 
+            "text": "", 
+            "title": "\u529f\u80fd"
+        }, 
+        {
+            "location": "/usage_realtime_kaohsiung/", 
+            "text": "\u958b\u653e\u8cc7\u6599\u52d5\u614b API \u7684\u4ecb\u63a5\u5de5\u5177 - \u9ad8\u96c4\u4ea4\u901a\u8cc7\u6599\n\u00b6\n\n\n\u8cc7\u6599\u4f86\u6e90: http://traffic.kctmc.nat.gov.tw/\n\n\n\u6a21\u7d44\n\u00b6\n\n\ntgod.kaohsiung_transport\n\n\n\n\n\u529f\u80fd\n\u00b6", 
+            "title": "\u52d5\u614b\u8cc7\u6599-\u9ad8\u96c4\u5e02"
+        }, 
+        {
+            "location": "/usage_realtime_kaohsiung/#api-", 
+            "text": "\u8cc7\u6599\u4f86\u6e90: http://traffic.kctmc.nat.gov.tw/", 
+            "title": "\u958b\u653e\u8cc7\u6599\u52d5\u614b API \u7684\u4ecb\u63a5\u5de5\u5177 - \u9ad8\u96c4\u4ea4\u901a\u8cc7\u6599"
+        }, 
+        {
+            "location": "/usage_realtime_kaohsiung/#_1", 
+            "text": "tgod.kaohsiung_transport", 
+            "title": "\u6a21\u7d44"
+        }, 
+        {
+            "location": "/usage_realtime_kaohsiung/#_2", 
+            "text": "", 
+            "title": "\u529f\u80fd"
+        }, 
+        {
+            "location": "/usage_static/", 
+            "text": "\u958b\u653e\u8cc7\u6599\u975c\u614b\u7a7a\u9593\u8cc7\u6599\u61c9\u7528\n\u00b6\n\n\n\u6a21\u7d44\n\u00b6\n\n\n\ntgod.get_map\n\n\n\n\n\n\u529f\u80fd\n\u00b6", 
+            "title": "\u975c\u614b\u8cc7\u6599"
+        }, 
+        {
+            "location": "/usage_static/#_1", 
+            "text": "", 
+            "title": "\u958b\u653e\u8cc7\u6599\u975c\u614b\u7a7a\u9593\u8cc7\u6599\u61c9\u7528"
+        }, 
+        {
+            "location": "/usage_static/#_2", 
+            "text": "tgod.get_map", 
+            "title": "\u6a21\u7d44"
+        }, 
+        {
+            "location": "/usage_static/#_3", 
+            "text": "", 
+            "title": "\u529f\u80fd"
+        }, 
+        {
+            "location": "/about/", 
+            "text": "\u95dc\u65bc\n\u00b6\n\n\n\u4f5c\u8005\n\u00b6\n\n\n\n\n\u9673\u5a01\u5168 (wcchin) \u570b\u7acb\u81fa\u7063\u5927\u5b78\u5730\u7406\u74b0\u5883\u8cc7\u6e90\u5b78\u7cfb\u535a\u58eb\u73ed\u5b78\u751f\n http://wcchin.github.io/ \n\n\n\n\n\u7248\u672c\n\u00b6\n\n\n\n\n2017-03-30 - v 0.0.1 : \u521d\u6b65\u5efa\u7acb\u6574\u500b\u67b6\u69cb", 
+            "title": "\u95dc\u65bc"
+        }, 
+        {
+            "location": "/about/#_1", 
+            "text": "", 
+            "title": "\u95dc\u65bc"
+        }, 
+        {
+            "location": "/about/#_2", 
+            "text": "\u9673\u5a01\u5168 (wcchin) \u570b\u7acb\u81fa\u7063\u5927\u5b78\u5730\u7406\u74b0\u5883\u8cc7\u6e90\u5b78\u7cfb\u535a\u58eb\u73ed\u5b78\u751f\n http://wcchin.github.io/", 
+            "title": "\u4f5c\u8005"
+        }, 
+        {
+            "location": "/about/#_3", 
+            "text": "2017-03-30 - v 0.0.1 : \u521d\u6b65\u5efa\u7acb\u6574\u500b\u67b6\u69cb", 
+            "title": "\u7248\u672c"
+        }
+    ]
+}
