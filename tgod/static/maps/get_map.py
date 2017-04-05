@@ -5,7 +5,8 @@ import pandas as pd
 from utils import read_from_path
 
 def _get_key(obj, r=False):
-    paths_config = 'file_loc_'+obj+'.csv'
+    fdir = os.path.dirname(__file__)
+    paths_config = fdir+'/'+'file_loc_'+obj+'.csv'
     df_path = pd.read_csv(paths_config)
     if not r:
         for k in df_path.key.tolist():
@@ -36,7 +37,7 @@ def _get_geodf(obj, akey):
         fp = fdir+'/'+dic_path[akey]['path']
         #print fp
         gdf = read_from_path.reading(fp)
-        return gdf.head()
+        return gdf
     else:
         print 'key not found, try checking the bkey: print_bkey()'
         print 'not returning anything'
@@ -53,12 +54,24 @@ def get_transportation(tkey):
 def main_test():
     #get_boundary_key()
     #get_transportation_key()
-
-    gdf = get_boundary('bsu0_pingtung')
-    print gdf.head()
-
-    #gdf = get_transportation('highway_2')
+    import matplotlib.pyplot as plt
+    #gdf = get_boundary('bsu0_pingtung')
     #print gdf.head()
+    gdf = get_transportation('highway_1')
+    print gdf
+    print len(gdf)
+
+    fig,ax = plt.subplots()
+    ax.set_aspect('equal')
+    for i in range(len(gdf)):
+        ls = gdf.iloc[i]['geometry']
+        print ls
+        x,y = ls.xy
+        print len(x)
+        print len(y)
+        ax.plot(x,y)
+    plt.show()
+
     pass
 
 if __name__ == '__main__':
