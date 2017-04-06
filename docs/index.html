@@ -31,6 +31,7 @@
           
             <h1 id="taiwan-geographic-open-data-tgod">Taiwan Geographic Open Data (tgod)<a class="headerlink" href="#taiwan-geographic-open-data-tgod" title="Permanent link">¶</a></h1>
 <h2 id="for-python">臺灣地理開放資料介接工具 (for python)<a class="headerlink" href="#for-python" title="Permanent link">¶</a></h2>
+<p>github 專案頁面: <a href="https://github.com/wcchin/tgod">https://github.com/wcchin/tgod</a></p>
 <h2 id="_1">背景<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
 <p>這專案的目的在於提供將臺灣地理相關的開放資料抓下來，並轉成 pandas.dataframe 的一個小工具。
 主要是因爲各公家單位準備的開放資料的格式都不太一樣，即使是同一個單位，不同的資料也會有不同的格式設定，包括有些會壓縮... 之類。
@@ -50,7 +51,8 @@
 </ul>
 <h2 id="getting-started">獲取 (getting started)<a class="headerlink" href="#getting-started" title="Permanent link">¶</a></h2>
 <p>在成功安裝好 geopandas, geobuf 之後：</p>
-<pre><code class="sh">$ git clone https://github.com/wcchin/tgod
+<pre><code class="sh">
+$ git clone https://github.com/wcchin/tgod
 $ cd tgod
 $ pip install -e .
 
@@ -64,23 +66,28 @@ so that changes to the source files will be immediately available to other users
 $ pip install -e .</p>
 </blockquote>
 <p>from page(https://python-packaging.readthedocs.io/en/latest/minimal.html)</p>
+<p>或者: 直接下載壓縮檔，然後解壓縮，再 cd tgod 進去 pip instal -e . 這樣。</p>
 <h2 id="usage">使用 (Usage)<a class="headerlink" href="#usage" title="Permanent link">¶</a></h2>
 <p>使用方法可參考 testing.py、 testing_static.py 
 或者簡單來說：</p>
 <ul>
 <li>即時資料的臺北市公車位置資料:</li>
 </ul>
-<pre><code class="python">from tgod import taipei_transport as tt  
+<pre><code class="python">
+from tgod import taipei_transport as tt  
 busdf = tt.bus()  
 print busdf.head(10)
+
 </code></pre>
 
 <ul>
 <li>靜態的空間資料 (取屏東最小統計區資料):</li>
 </ul>
-<pre><code class="python">from tgod import get_map  
+<pre><code class="python">
+from tgod import get_map  
 gdf = get_map.get_boundary('bsu0_pingtung')  
 print gdf.head()
+
 </code></pre>
 
 <h2 id="dependencies">依賴工具 (dependencies)<a class="headerlink" href="#dependencies" title="Permanent link">¶</a></h2>
@@ -285,7 +292,7 @@ print gdf.head()
 
   <!--
   MkDocs version      : 0.16.2
-  Docs Build Date UTC : 2017-04-06 14:17:46
+  Docs Build Date UTC : 2017-04-06 14:37:31
   -->
 </body>
 </html>
