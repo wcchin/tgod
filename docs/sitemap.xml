@@ -43,6 +43,14 @@
 
     
     <url>
+     <loc>/usage_utils/</loc>
+     <lastmod>2017-04-06</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
      <loc>/about/</loc>
      <lastmod>2017-04-06</lastmod>
      <changefreq>daily</changefreq>

@@ -15,17 +15,17 @@ def vd(f_postfix=None):
     # http://data.gov.tw/node/30858
     url = "http://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000357-001"
     out = getting.HandleNonGZippedJSON(url)
-    out.run()
-    #print out.json_data['result']['fields']
+    #out.run()
+    #print out.data['result']['fields']
     """
-    for key, value in out.json_data['result'].iteritems():
+    for key, value in out.data['result'].iteritems():
         print key
         print value
     """
     dict_temp = {}
-    rec_len = len(out.json_data['result']['records'])
+    rec_len = len(out.data['result']['records'])
     for i in range(rec_len):
-        dict_temp[i] = out.json_data['result']['records'][i]
+        dict_temp[i] = out.data['result']['records'][i]
     df_temp = pd.DataFrame.from_dict(dict_temp,orient='index')
     #print df_temp.head()
     #ubid = df_temp.sno.tolist()
@@ -137,17 +137,17 @@ def bikeshare(f_postfix=None):
     # http://data.gov.tw/node/28318
     url = 'http://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000352-001'
     out = getting.HandleNonGZippedJSON(url)
-    out.run()
-    #print out.json_data['result']['fields']
+    #out.run()
+    #print out.data['result']['fields']
     """
-    for key, value in out.json_data['result'].iteritems():
+    for key, value in out.data['result'].iteritems():
         print key
         print value
     """
     dict_temp = {}
-    rec_len = len(out.json_data['result']['records'])
+    rec_len = len(out.data['result']['records'])
     for i in range(rec_len):
-        dict_temp[i] = out.json_data['result']['records'][i]
+        dict_temp[i] = out.data['result']['records'][i]
     df_temp = pd.DataFrame.from_dict(dict_temp,orient='index')
     #print df_temp.head()
     ubid = df_temp.sno.tolist()

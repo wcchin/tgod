@@ -23,17 +23,21 @@
 - 即時資料的臺北市公車位置資料:
 
     ```python
+    
     from tgod import taipei_transport as tt
     busdf = tt.bus()
     print busdf.head(10)
+    
     ```
 
 - 靜態的空間資料 (取屏東最小統計區資料):
     
     ```python
+    
     from tgod import get_map
     gdf = get_map.get_boundary('bsu0_pingtung')
     print gdf.head()
+    
 
     ```
 
@@ -46,3 +50,6 @@
 ---
 
 2017-03-30 - v 0.0.1 : 初步建立整個架構
+
+### License
+tgod is distributed under a 3-clause ("Simplified" or "New") BSD license. 

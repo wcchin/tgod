@@ -10,8 +10,8 @@ from utils import get_gJX as getting
 
 def bus(f_postfix=None):
     out = getting.HandleGZippedJSON("http://data.taipei/bus/BUSDATA")
-    out.run()
-    table2 = pd.DataFrame.from_dict(out.json_data['BusInfo'])
+    #out.run()
+    table2 = pd.DataFrame.from_dict(out.data['BusInfo'])
     dt = table2.DataTime.tolist()
     dt2 = []
     timestamp = []
@@ -26,8 +26,8 @@ def bus(f_postfix=None):
 
 def busevent(f_postfix=None):
     out = getting.HandleGZippedJSON("http://data.taipei/bus/BUSEVENT")
-    out.run()
-    table2 = pd.DataFrame.from_dict(out.json_data['BusInfo'])
+    #out.run()
+    table2 = pd.DataFrame.from_dict(out.data['BusInfo'])
     print 'hey',table2.columns
     dt = table2['DataTime'].tolist()
     dt2 = []
@@ -46,10 +46,10 @@ def vehicle_detector(f_postfix=None):
 
 def vd(f_postfix=None):
     out = getting.HandleGZippedXML("http://data.taipei/tisv/VDDATA")
-    out.run()
-    thetime = out.xml_data['VDInfoSet']['ExchangeTime']
+    #out.run()
+    thetime = out.data['VDInfoSet']['ExchangeTime']
     table2=None
-    for row in  out.xml_data['VDInfoSet']['VDInfo']:
+    for row in  out.data['VDInfoSet']['VDInfo']:
         data = row['VDData']['VDDevice']
         vdid=data['DeviceID']
         lanedata=data['LaneData']
@@ -105,8 +105,8 @@ def vd(f_postfix=None):
 
 def road_level(f_postfix=None):
     out = getting.HandleGZippedXML("http://data.taipei/tisv/VD")
-    out.run()
-    data = out.xml_data
+    #out.run()
+    data = out.data
     data2 = { k.replace('{http://www.iii.org.tw/dax/vd}',''):v for k,v in data.iteritems() }
     data3 = { k.replace('{http://www.iii.org.tw/dax/vd}',''):v for k,v in data2['ExchangeData'].iteritems() }
     thetime = data3['ExchangeTime']
@@ -127,10 +127,10 @@ def road_level(f_postfix=None):
 
 def bikeshare(f_postfix=None):
     out = getting.HandleGZippedJSON("http://data.taipei/youbike")
-    out.run()
+    #out.run()
     thetime=None
     table2=None
-    for key, val in out.json_data['retVal'].iteritems():
+    for key, val in out.data['retVal'].iteritems():
         ubid=key
         if thetime is None:
             thetime= val['mday']
@@ -157,8 +157,8 @@ def bikeshare(f_postfix=None):
 
 def mrt(f_postfix=None):
     out = getting.HandleNonGZippedJSON("http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=55ec6d6e-dc5c-4268-a725-d04cc262172b")
-    out.run()
-    table2 =pd.DataFrame.from_dict(out.json_data['result']['results'])
+    #out.run()
+    table2 =pd.DataFrame.from_dict(out.data['result']['results'])
     dt = table2.UpdateTime.tolist()
     dt2 = []
     timestamp = []

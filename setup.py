@@ -15,7 +15,7 @@ setup(
 
     url="https://github.com/wcchin/tgod",
 
-    # license="LICENSE.txt",
+    license="LICENSE.txt",
     description="Taiwan Geographic Open Data",
 
     long_description=open("README.md").read(),
@@ -26,7 +26,7 @@ setup(
         'Intended Audience :: Science/Research',
         'Topic :: Scientific/Engineering :: GIS',
 
-         'License :: OSI Approved :: MIT License',
+         'License :: OSI Approved :: BSD License',
 
         'Programming Language :: Python :: 2.7',
     ],

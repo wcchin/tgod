@@ -12,9 +12,9 @@ def bus_data(f_postfix=None):
     # http://data.kcg.gov.tw/dataset/bus-real-time-dynamic
     url = 'http://ibus.tbkc.gov.tw/xmlbus/GetBusData.xml'
     out = getting.HandleNonGZippedXML(url)
-    out.run()
-    infos = out.xml_data['BusDynInfo']['EssentialInfo']
-    busdata = out.xml_data['BusDynInfo']['BusInfo']['BusData']
+    #out.run()
+    infos = out.data['BusDynInfo']['EssentialInfo']
+    busdata = out.data['BusDynInfo']['BusInfo']['BusData']
     bus_dict = {}
     i = 0
     for bus in busdata:
@@ -35,8 +35,8 @@ def road_level(f_postfix=None):
     # http://data.kcg.gov.tw/dataset/department-of-transportation9
     url = 'http://xml11.kctmc.nat.gov.tw:8080/XML/roadlevel_value.xml'
     out = getting.HandleNonGZippedXML(url)
-    out.run()
-    infos = out.xml_data['XML_Head']['Infos']['Info']
+    #out.run()
+    infos = out.data['XML_Head']['Infos']['Info']
     data_dic = {}
     for i in range(len(infos)):
         data_dic[i] = infos[i]
@@ -55,8 +55,8 @@ def vd(f_postfix=None):
     # http://data.kcg.gov.tw/dataset/department-of-transportation1
     url = 'http://xml11.kctmc.nat.gov.tw:8080/XML/vd_value.xml'
     out = getting.HandleNonGZippedXML(url)
-    out.run()
-    infos = out.xml_data['XML_Head']['Infos']['Info']
+    #out.run()
+    infos = out.data['XML_Head']['Infos']['Info']
     data_dic = {}
     j = 0
     for i in infos:
@@ -86,8 +86,8 @@ def vd5min(f_postfix=None):
     # http://data.kcg.gov.tw/dataset/department-of-transportation2
     url = 'http://xml11.kctmc.nat.gov.tw:8080/XML/vd_value5.xml'
     out = getting.HandleNonGZippedXML(url)
-    out.run()
-    infos = out.xml_data['XML_Head']['Infos']['Info']
+    #out.run()
+    infos = out.data['XML_Head']['Infos']['Info']
     data_dic = {}
     j = 0
     for i in infos:

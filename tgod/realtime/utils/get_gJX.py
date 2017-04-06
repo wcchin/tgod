@@ -14,7 +14,8 @@ from collections import defaultdict
 class HandleGZippedJSON:
     def __init__(self, url):
         self.url = url
-        self.json_data = None
+        self.data = None
+        self.run()
 
     def run(self):
         #httplib.HTTPConnection.debuglevel = 1
@@ -27,13 +28,14 @@ class HandleGZippedJSON:
         gzipper = gzip.GzipFile(fileobj=c_stream)
         data = gzipper.read()
         #print data
-        self.json_data = json.loads(data) # is a dict
+        self.data = json.loads(data) # is a dict
         #return json.loads(data)
 
 class HandleNonGZippedJSON:
     def __init__(self, url):
         self.url = url
-        self.json_data = None
+        self.data = None
+        self.run()
 
     def run(self):
         #httplib.HTTPConnection.debuglevel = 1
@@ -44,13 +46,14 @@ class HandleNonGZippedJSON:
         f = opener.open(request)
         c_data = f.read()
         #print c_data
-        self.json_data = json.loads(c_data) # is a dict
+        self.data = json.loads(c_data) # is a dict
 
 
 class HandleGZippedXML:
     def __init__(self, url):
         self.url = url
-        self.xml_data = None
+        self.data = None
+        self.run()
 
     def run(self):
         #httplib.HTTPConnection.debuglevel = 1
@@ -64,12 +67,13 @@ class HandleGZippedXML:
         data = gzipper.read()
         #print data
         xml_root = ET.fromstring(data)
-        self.xml_data = etree_to_dict(xml_root)
+        self.data = etree_to_dict(xml_root)
 
 class HandleNonGZippedXML:
     def __init__(self, url):
         self.url = url
-        self.xml_data = None
+        self.data = None
+        self.run()
 
     def run(self):
         #httplib.HTTPConnection.debuglevel = 1
@@ -80,7 +84,7 @@ class HandleNonGZippedXML:
         c_data = f.read()
         #print c_data
         xml_root = ET.fromstring(c_data)
-        self.xml_data = etree_to_dict(xml_root)
+        self.data = etree_to_dict(xml_root)
 
 def etree_to_dict(t):
     d = {t.tag: {} if t.attrib else None}
@@ -105,33 +109,8 @@ def etree_to_dict(t):
 def mainXML():
     from pprint import pprint
     out = HandleGZippedXML("http://data.taipei/tisv/VDDATA")
-    out.run()
-    pprint(out.xml_data)
+    pprint(out.data)
 
-def mainJSON():
-    from pprint import pprint
-    out = HandleGZippedJSON("http://data.taipei/bus/BUSDATA")
-    out.run()
-    pprint(out.json_data)
-
-def mainJSON2():
-    from pprint import pprint
-    out = HandleNonGZippedJSON("http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=55ec6d6e-dc5c-4268-a725-d04cc262172b")
-    out.run()
-    pprint(out.json_data)
-
-def mainJSON3():
-    from pprint import pprint
-    url = "http://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000357-001"
-    out = HandleNonGZippedJSON(url)
-    out.run()
-    pprint(out.json_data)
-
-def mainXML2():
-    url = 'http://xml11.kctmc.nat.gov.tw:8080/XML/roadlevel_value.xml'
-    out = HandleNonGZippedXML(url)
-    out.run()
-    print out.xml_data
 
 if __name__ == '__main__':
-    mainXML2()
+    mainXML()
