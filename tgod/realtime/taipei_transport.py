@@ -28,7 +28,7 @@ def busevent(f_postfix=None):
     out = getting.HandleGZippedJSON("http://data.taipei/bus/BUSEVENT")
     #out.run()
     table2 = pd.DataFrame.from_dict(out.data['BusInfo'])
-    print 'hey',table2.columns
+    #print 'hey',table2.columns
     dt = table2['DataTime'].tolist()
     dt2 = []
     timestamp = []
