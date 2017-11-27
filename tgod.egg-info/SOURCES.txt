@@ -5,6 +5,8 @@ tgod.egg-info/dependency_links.txt
 tgod.egg-info/requires.txt
 tgod.egg-info/top_level.txt
 tgod/realtime/__init__.py
+tgod/realtime/get_gJX.py
+tgod/realtime/getfromurl.py
 tgod/realtime/kaohsiung_transport.py
 tgod/realtime/newtaipei_transport.py
 tgod/realtime/push_removeduplicate_ntp.py
@@ -15,5 +17,7 @@ tgod/realtime/utils/get_gJX.py
 tgod/static/__init__.py
 tgod/static/maps/__init__.py
 tgod/static/maps/get_map.py
+tgod/static/maps/pbfs/facility/temp.py
+tgod/static/maps/pbfs/recreation/temp.py
 tgod/static/maps/utils/__init__.py
 tgod/static/maps/utils/read_pbfgz.py

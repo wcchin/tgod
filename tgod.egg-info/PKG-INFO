@@ -5,7 +5,7 @@ Summary: Taiwan Geographic Open Data
 Home-page: https://github.com/wcchin/tgod
 Author: Benny Chin
 Author-email: wcchin.88@gmal.com
-License: UNKNOWN
+License: LICENSE.txt
 Description: ## Taiwan Geographic Open Data (tgod)
         ## 臺灣地理開放資料介接工具 (for python)
         
@@ -31,17 +31,21 @@ Description: ## Taiwan Geographic Open Data (tgod)
         - 即時資料的臺北市公車位置資料:
         
             ```python
+            
             from tgod import taipei_transport as tt
             busdf = tt.bus()
             print busdf.head(10)
+            
             ```
         
         - 靜態的空間資料 (取屏東最小統計區資料):
             
             ```python
+            
             from tgod import get_map
             gdf = get_map.get_boundary('bsu0_pingtung')
             print gdf.head()
+            
         
             ```
         
@@ -55,10 +59,13 @@ Description: ## Taiwan Geographic Open Data (tgod)
         
         2017-03-30 - v 0.0.1 : 初步建立整個架構
         
+        ### License
+        tgod is distributed under a 3-clause ("Simplified" or "New") BSD license. 
+        
 Keywords: spatial network concentration
 Platform: UNKNOWN
 Classifier: Development Status :: 3 - Alpha
 Classifier: Intended Audience :: Science/Research
 Classifier: Topic :: Scientific/Engineering :: GIS
-Classifier: License :: OSI Approved :: MIT License
+Classifier: License :: OSI Approved :: BSD License
 Classifier: Programming Language :: Python :: 2.7
