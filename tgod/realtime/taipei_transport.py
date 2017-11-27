@@ -9,7 +9,7 @@ import datetime
 from utils import get_gJX as getting
 
 def bus(f_postfix=None):
-    out = getting.HandleGZippedJSON("http://data.taipei/bus/BUSDATA")
+    out = getting.HandleGZippedJSON("https://tcgbusfs.blob.core.windows.net/blobbus/GetBusData.gz")
     #out.run()
     table2 = pd.DataFrame.from_dict(out.data['BusInfo'])
     dt = table2.DataTime.tolist()
@@ -25,10 +25,10 @@ def bus(f_postfix=None):
     return table2
 
 def busevent(f_postfix=None):
-    out = getting.HandleGZippedJSON("http://data.taipei/bus/BUSEVENT")
+    out = getting.HandleGZippedJSON("https://tcgbusfs.blob.core.windows.net/blobbus/GetBusEvent.gz")
     #out.run()
     table2 = pd.DataFrame.from_dict(out.data['BusInfo'])
-    print 'hey',table2.columns
+    #print 'hey',table2.columns
     dt = table2['DataTime'].tolist()
     dt2 = []
     timestamp = []
