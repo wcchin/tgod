@@ -45,7 +45,7 @@ def vehicle_detector(f_postfix=None):
     return vd(f_postfix=f_postfix)
 
 def vd(f_postfix=None):
-    out = getting.HandleGZippedXML("http://data.taipei/tisv/VDDATA")
+    out = getting.HandleGZippedXML("https://tcgbusfs.blob.core.windows.net/blobtisv/GetVDDATA.xml.gz")
     #out.run()
     thetime = out.data['VDInfoSet']['ExchangeTime']
     table2=None
