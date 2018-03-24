@@ -1,5 +1,9 @@
+<<<<<<< HEAD
+*.pyc
+=======
 # Compiled python modules.
 *.pyc
 
 # Python egg metadata, regenerated from source files by setuptools.
+>>>>>>> 3b903d56c65a5b5b54d7acc2bc029d9ce0410a74
 /*.egg-info
